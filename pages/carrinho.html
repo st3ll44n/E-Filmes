@@ -42,37 +42,20 @@
             <h1 class="my-3">CARRINHO</h1>
             <div id="infoCarrinho" class="container row p-0">
                 <!-- LADO A - PRODUTOS ADICIONADOS AO CARRINHO -->
-                <div id="produtosDoCarrinho" class="col-7">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                          <div class="col-md-2">
-                            <img src="../images/oiluminado.jpeg" class="img-fluid rounded-start" alt="...">
-                          </div>
-                          <div class="col-md-10">
-                            <div class="card-body h-100 d-flex align-items-center justify-content-between">
-                              <h6 class="card-title">O Iluminado (1980) </h6>
-                              <p class="text-success">R$ 19,90</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                  <div id="produtosDoCarrinho" class="col-7">
+                      <button onclick="updateCart()">Finalizar comprar</button>
+                  </div>
+                  <!--  -->
+                  <div>
 
-                      <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                          <div class="col-md-2">
-                            <img src="../images/babadook.jpeg" class="img-fluid rounded-start" alt="...">
-                          </div>
-                          <div class="col-md-10">
-                            <div class="card-body h-100 d-flex align-items-center justify-content-between">
-                              <h6 class="card-title">Babadook (2014) </h6>
-                              <p class="text-success">R$ 19,90</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                  </div>
+
+                  <div id="total-price" class="text-end">
+                    <!-- O preço total será exibido aqui -->
                 </div>
 
-                <!-- LADO B - VALORES, ENDEREÇO E COMPRA DO CARRINHO -->
+                
+                 <!-- LADO B - VALORES, ENDEREÇO E COMPRA DO CARRINHO -->
                 <div id="comprarCarrinho" class="col-5">
                     <form>
                         <!-- NOME -->
@@ -93,12 +76,12 @@
                         <button type="submit" class="btn btn-primary">COMPRAR</button>
                     </form>
                 </div>
-            </div>
+            </div> 
         </section>
     </main>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="../scripts/pegarCep.js"></script>
+    <script src="../script/pegarCep.js"></script>
 </body>
 </html>
