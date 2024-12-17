@@ -43,18 +43,12 @@
             <div id="infoCarrinho" class="container row p-0">
                 <!-- LADO A - PRODUTOS ADICIONADOS AO CARRINHO -->
                   <div id="produtosDoCarrinho" class="col-7">
-                      <button onclick="updateCart()">Finalizar comprar</button>
-                  </div>
-                  <!--  -->
-                  <div>
-
                   </div>
 
                   <div id="total-price" class="text-end">
                     <!-- O preço total será exibido aqui -->
                 </div>
-
-                
+               
                  <!-- LADO B - VALORES, ENDEREÇO E COMPRA DO CARRINHO -->
                 <div id="comprarCarrinho" class="col-5">
                     <form>
@@ -72,13 +66,41 @@
                         <div class="mb-3">
                             <label for="estado" class="form-label">Estado :</label>
                             <input type="text" class="form-control" id="estado">
-                          </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="estado" class="form-label">Forma de pagamento :</label>
+                            <input type="text" class="form-control" id="pagamento">
+                        </div>
                         <button type="submit" class="btn btn-primary">COMPRAR</button>
                     </form>
                 </div>
             </div> 
         </section>
     </main>
+
+    <script>
+        // Adiciona os filmes à lista de filmes e adiciona os botões de "comprar" (esse código deve ser executado fora do carrinho)
+lista_produtos_no_carrinho.forEach(Item => {
+    const produtoDiv = document.createElement('div');
+    produtoDiv.classList.add('card', 'mb-3');
+    produtoDiv.style.maxWidth = '540px';
+    produtoDiv.innerHTML = `
+        <div class="row g-0">
+            <div class="col-md-2">
+                <img src="${Item.imagem}" class="img-fluid rounded-start" alt="${Item.titulo}">
+            </div>
+            <div class="col-md-10">
+                <div class="card-body h-100 d-flex align-items-center justify-content-between">
+                    <h6 class="card-title">${Item.titulo}</h6>
+                    <p class="text-success">${Item.valor}</p>
+                </div>
+            </div>
+        </div>
+    `;
+    // Exibindo o filme na seção correta (por exemplo, #produtosDoCarrinho ou outra seção adequada)
+    document.querySelector('#produtosDoCarrinho').appendChild(produtoDiv);
+});
+    </script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
