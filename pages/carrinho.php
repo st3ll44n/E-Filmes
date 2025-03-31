@@ -11,7 +11,7 @@
         <nav class="navbar navbar-expand-lg bg-dark text-light">
             <div class="container">
             <!-- logo -->
-            <a class="navbar-brand text-light" href="../index.html">E-FILMES</a>
+            <a class="navbar-brand text-light" href="../index.php">E-FILMES</a>
             <!-- botao mobile -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
