@@ -115,18 +115,39 @@ updateCart();
 
 //------------------------------------------------------------------------------------------------------------------------------------------
 
-document.querySelector('#cep').addEventListener('focusout', pegarCep);
+// document.querySelector('#cep').addEventListener('focusout', pegarCep);
 
-function pegarCep() {
-    const cep = document.querySelector('#cep').value;
+// function pegarCep() {
+//     const cep = document.querySelector('#cep').value;
 
-    fetch(`https://viacep.com.br/ws/${cep}/json/`)
-        .then((info) => info.json())
-        .then((dados) => {
-            console.log(dados);
-            document.getElementById('estado').value = dados.estado;
-        })
-        .catch(error => {
-            console.error('Erro ao buscar CEP:', error);
-        });
+//     fetch(`https://viacep.com.br/ws/${cep}/json/`)
+//         .then((info) => info.json())
+//         .then((dados) => {
+//             console.log(dados);
+//             document.getElementById('estado').value = dados.estado;
+//         })
+//         .catch(error => {
+//             console.error('Erro ao buscar CEP:', error);
+//         });
+// }
+
+function cadastrarUsuario() {
+    const formData = new FormData();
+    formData.append("nome", document.getElementById('nome').value);
+    formData.append("email", document.getElementById('email').value);
+    formData.append("senha", document.getElementById('senha').value);
+    formData.append("data_nascimento", document.getElementById('data_nascimento').value);
+    formData.append("endereco", document.getElementById('endereco').value);
+    formData.append("telefone", document.getElementById('telefone').value);
+
+    fetch('cadastrar.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Resposta do servidor:", data);
+        alert(data.mensagem || data.erro);
+    })
+    .catch(error => console.error('Erro ao cadastrar usuário:', error));
 }

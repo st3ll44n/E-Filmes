@@ -144,8 +144,6 @@ INSERT INTO usuarios (nome, email, senha, data_nascimento, endereco, telefone) V
 ('Juliana Ribeiro', 'juliana.ribeiro@email.com', 'senha606', '1987-09-25', 'Avenida I, 606, Bairro Q, Cidade R', 91987654321),
 ('Ricardo Gomes', 'ricardo.gomes@email.com', 'senha707', '1996-04-18', 'Rua J, 707, Bairro P, Cidade Q', 11976543210);
 
-select * from usuarios;
-
 INSERT INTO compras (id_usuario, total, status_compra) VALUES
 (1, 99.90, 'Concluída'),
 (2, 49.90, 'Em Processamento'),

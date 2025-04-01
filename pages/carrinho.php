@@ -1,3 +1,39 @@
+<?php
+include("../database/config.php");
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cadastrar'])) {
+    $nome = $_POST['nome'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $senha = password_hash($_POST['senha'] ?? '', PASSWORD_DEFAULT);
+    $data_nascimento = $_POST['data_nascimento'] ?? '';
+    $endereco = $_POST['endereco'] ?? '';
+    $telefone = $_POST['telefone'] ?? '';
+
+    if (empty($nome) || empty($email) || empty($_POST['senha'])) {
+        $erro = "Campos obrigatórios não preenchidos!";
+    } else {
+        $sql = "INSERT INTO usuarios (nome, email, senha, data_nascimento, endereco, telefone) VALUES (?, ?, ?, ?, ?, ?)";
+
+        if ($stmt = mysqli_prepare($conect, $sql)) {
+            mysqli_stmt_bind_param($stmt, "ssssss", $nome, $email, $senha, $data_nascimento, $endereco, $telefone);
+
+            if (mysqli_stmt_execute($stmt)) {
+                $sucesso = "Usuário cadastrado com sucesso!";
+            } else {
+                $erro = "Erro ao cadastrar usuário: " . mysqli_error($conect);
+            }
+            mysqli_stmt_close($stmt);
+        } else {
+            $erro = "Erro na preparação da consulta: " . mysqli_error($conect);
+        }
+    }
+    mysqli_close($conect);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -27,6 +63,9 @@
                 <li class="nav-item">
                     <a class="nav-link text-light" href="carrinho.php">Carrinho</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="pages/addFilmes.php">Adicionar</a>
+                </li>
                 </ul>
                 <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Procurar produto" aria-label="Search">
@@ -51,28 +90,39 @@
                
                  <!-- LADO B - VALORES, ENDEREÇO E COMPRA DO CARRINHO -->
                 <div id="comprarCarrinho" class="col-5">
-                    <form>
-                        <!-- NOME -->
-                        <div class="mb-3">
-                          <label for="nome" class="form-label">Nome :</label>
-                          <input type="text" class="form-control" id="nome">
-                        </div>
-                        <!-- CEP -->
-                        <div class="mb-3">
-                          <label for="cep" class="form-label">Cep :</label>
-                          <input type="text" class="form-control" id="cep">
-                        </div>
-                        <!-- ESTADO -->
-                        <div class="mb-3">
-                            <label for="estado" class="form-label">Estado :</label>
-                            <input type="text" class="form-control" id="estado">
-                        </div>
-                        <div class="mb-3">
-                            <label for="estado" class="form-label">Forma de pagamento :</label>
-                            <input type="text" class="form-control" id="pagamento">
-                        </div>
-                        <button type="submit" class="btn btn-primary">COMPRAR</button>
+                    <h2>Cadastro</h2>
+                    <form onsubmit="event.preventDefault(); cadastrarUsuario();" method="POST" action="">
+                        <label>Nome:</label>
+                        <input type="text" id="nome" required><br>
+
+                        <label>Email:</label>
+                        <input type="email" id="email" required><br>
+
+                        <label>Senha:</label>
+                        <input type="password" id="senha" required><br>
+
+                        <label>Data de Nascimento:</label>
+                        <input type="date" id="data_nascimento" required><br>
+
+                        <label>CEP:</label>
+                        <input type="text" id="cep" required><br>
+
+                        <label>Endereço:</label>
+                        <input type="text" id="endereco" required><br>
+
+                        <label>Telefone:</label>
+                        <input type="text" id="telefone" required><br>
+
+                        <button type="submit">Cadastrar</button>
                     </form>
+
+                    <?php if (isset($sucesso)) : ?>
+                        <script>alert("<?= $sucesso; ?>");</script>
+                    <?php endif; ?>
+
+                    <?php if (isset($erro)) : ?>
+                        <script>alert("<?= $erro; ?>");</script>
+                    <?php endif; ?>
                 </div>
             </div> 
         </section>
@@ -101,7 +151,6 @@ lista_produtos_no_carrinho.forEach(Item => {
     document.querySelector('#produtosDoCarrinho').appendChild(produtoDiv);
 });
     </script>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="../script/pegarCep.js"></script>

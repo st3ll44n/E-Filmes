@@ -20,7 +20,7 @@
             <!-- h- (height) -->
             <div class="container">
             <!-- logo -->
-            <a class="navbar-brand text-light" href="index.php">E-FILMES</a>
+            <a class="navbar-brand text-light" href="index.php?menu=home">E-FILMES</a>
             <!-- botao mobile -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -28,13 +28,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active text-light" aria-current="page" href="index.php">Home</a>
+                    <a class="nav-link active text-light" aria-current="page" href="index.php?menu=home">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="pages/catalogo.php">Catalogo</a>
+                    <a class="nav-link text-light" href="pages/catalogo.php?menu=catalogo">Catalogo</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="pages/carrinho.php">Carrinho</a>
+                    <a class="nav-link text-light" href="pages/carrinho.php?menu=carrinho">Carrinho</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="pages/addFilmes.php?menu=addFilmes">Adicionar</a>
                 </li>
                 </ul>
                 <form class="d-flex" role="search">
@@ -45,6 +48,38 @@
             </div>
         </nav>
     </header>
+
+    <main>
+      <?php
+
+      if(isset($_GET['menu'])){
+        $pagina = $_GET['menu'];
+      }else{
+        $pagina = "home";
+      }
+
+      switch($pagina){
+            case 'home':
+                include("index.php");
+                break;
+            case 'catalogo':
+                include("pages/catalogo.php");
+                break;
+            case 'addfilme':
+                include("pages/addFilmes.php");
+                break;
+            case 'carrinho':
+                include("pages/carrinho.php");
+                break;
+            case 'dbaddFilme':
+                include("pages/db_addFilmes.php");
+                break;
+            default:
+                include("index.php");
+                break;
+        }
+        ?>
+    </main>
 
     <main>
         <section id="banner">
@@ -90,8 +125,9 @@
             <!-- ITEMS JS -->
           </div>
         </section>
-    </main>
 
+        
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="script/script.js"></script>
